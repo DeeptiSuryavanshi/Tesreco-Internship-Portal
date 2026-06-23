@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}TESRECO Internship Portal{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-inner">
+   <a href="{{ url_for('home') }}" class="logo">
+    <img src="{{ url_for('static', filename='logo.png') }}"
+         alt="TESRECO Logo"
+         class="logo-img">
+
+    <span class="logo-text">
+        TESRECO
+        <small>Technologies</small>
+    </span>
+  </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="nav-links">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
+      <a href="{{ url_for('about') }}" class="{{ 'active' if active_page == 'about' else '' }}">About</a>
+      <a href="{{ url_for('add_intern_page') }}">Add Intern</a>
+      <a href="{{ url_for('view_interns') }}" class="{{ 'active' if active_page == 'view' else '' }}">View Interns</a>
+      <a href="{{ url_for('attendance_page') }}" class="{{ 'active' if active_page == 'attendance' else '' }}">Attendance</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-main">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-wrap">
+        {% for msg in messages %}
+          <div class="flash-msg">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <p>&copy; {{ current_year|default(2026) }} TESRECO Technologies &mdash; Internship Management Portal</p>
+</footer>
+
+</body>
+</html>

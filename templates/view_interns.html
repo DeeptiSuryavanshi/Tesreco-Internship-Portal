@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}View Interns — TESRECO Internship Portal{% endblock %}
+
+{% block content %}
+<section class="table-section">
+  <h2>Registered Interns</h2>
+  <p class="table-sub">All interns currently enrolled in the TESRECO Internship Program.</p>
+
+  <div class="table-card">
+    <table class="intern-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Domain</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for intern in interns %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ intern['name'] }}</td>
+        <td>{{ intern['email'] }}</td>
+        <td>
+            <span class="domain-badge">
+                {{ intern['domain'] }}
+            </span>
+        </td>
+        <td>
+            <form method="POST"
+                  action="{{ url_for('delete_intern', intern_id=intern['intern_id']) }}"
+                  onsubmit="return confirm('Remove this intern?');">
+
+                <button type="submit" class="btn-delete">
+                    Delete
+                </button>
+
+            </form>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5" class="empty-row">
+            No interns added yet.
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="attendance-container">
+
+    <div class="attendance-form">
+
+        <h2>Mark Attendance</h2>
+
+        <form method="POST" action="/mark-attendance">
+
+            <label for="intern_id">Select Intern</label>
+
+            <select id="intern_id" name="intern_id" required>
+
+                <option value="">-- Select Intern --</option>
+
+                {% for intern in interns %}
+                <option value="{{ intern['intern_id'] }}">
+                    {{ intern['name'] }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+            <label for="attendance_date">Date</label>
+            <input id="attendance_date" type="date" name="date" required title="Select a date" placeholder="Select date">
+
+            <label>Status</label>
+
+            <div class="radio-group">
+
+                <label>
+                    <input type="radio" name="status" value="Present" checked>
+                    Present
+                </label>
+
+                <label>
+                    <input type="radio" name="status" value="Absent">
+                    Absent
+                </label>
+
+                <label>
+                    <input type="radio" name="status" value="Late">
+                    Late
+                </label>
+
+            </div>
+
+            <button type="submit">
+                Log Attendance
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="attendance-table">
+
+        <h2>Recent Logs</h2>
+
+        <table>
+
+            <tr>
+                <th>Date</th>
+                <th>Intern</th>
+                <th>Status</th>
+            </tr>
+
+            {% for row in attendance_logs %}
+
+            <tr>
+
+                <td>{{ row['date'] }}</td>
+                <td>{{ row['name'] }}</td>
+                <td>{{ row['status'] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
