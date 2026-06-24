@@ -1,43 +1,54 @@
-from db import get_connection
+from database.db import get_connection
+import sqlite3
+import os
 
 conn = get_connection()
 cur = conn.cursor()
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS Interns(
-    intern_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE,
-    domain TEXT
-)
-""")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "tesreco.db")
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS Mentors(
-    mentor_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    specialization TEXT
-)
-""")
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS MentorAssignment(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    intern_id INTEGER,
-    mentor_id INTEGER
-)
-""")
+def get_connection():
+    """Return a new SQLite connection with row access by column name."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS Attendance(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    intern_id INTEGER,
-    date TEXT,
-    status TEXT
-)
-""")
 
-conn.commit()
-conn.close()
+def create_tables():
+    """Create the interns and mentors tables if they don't already exist."""
+    conn = get_connection()
 
-print("Tables created successfully!")
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS interns (
+            intern_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name      TEXT NOT NULL,
+            email     TEXT NOT NULL,
+            domain    TEXT NOT NULL
+        )
+    """)
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS mentors (
+            mentor_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+            name           TEXT NOT NULL,
+            specialization TEXT NOT NULL
+        )
+    """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS attendance (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            intern_id INTEGER NOT NULL,
+            date TEXT NOT NULL,
+            status TEXT NOT NULL
+       )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+if __name__ == "__main__":
+    create_tables()
+    print(f"Tables verified/created in {DB_PATH}")

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}View Mentors — TESRECO Internship Portal{% endblock %}
+
+{% block content %}
+<section class="table-section">
+  <h2>Mentors</h2>
+  <p class="table-sub">Mentors currently guiding interns at TESRECO Technologies.</p>
+
+  <div class="table-card">
+    <table class="intern-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Specialization</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mentor in mentors %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ mentor.name }}</td>
+          <td><span class="domain-badge">{{ mentor.specialization }}</span></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="3" class="empty-row">
+            No mentors added yet. <a href="{{ url_for('add_mentor') }}">Add the first one</a>.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

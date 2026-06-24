@@ -29,24 +29,26 @@
 
             <label>Status</label>
 
-            <div class="radio-group">
+    <div class="form-group">
+    <label>Status</label>
 
-                <label>
-                    <input type="radio" name="status" value="Present" checked>
-                    Present
-                </label>
+    <div class="status-group">
+        <label class="status-option">
+            <input type="radio" name="status" value="Present" checked>
+            <span>Present</span>
+        </label>
 
-                <label>
-                    <input type="radio" name="status" value="Absent">
-                    Absent
-                </label>
+        <label class="status-option">
+            <input type="radio" name="status" value="Absent">
+            <span>Absent</span>
+        </label>
 
-                <label>
-                    <input type="radio" name="status" value="Late">
-                    Late
-                </label>
-
-            </div>
+        <label class="status-option">
+            <input type="radio" name="status" value="Late">
+            <span>Late</span>
+        </label>
+        </div>
+   </div>
 
             <button type="submit">
                 Log Attendance
@@ -81,6 +83,7 @@
             {% endfor %}
 
         </table>
+        
 
     </div>
 

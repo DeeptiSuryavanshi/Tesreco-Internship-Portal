@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Add Mentor — TESRECO Internship Portal{% endblock %}
+
+{% block content %}
+<section class="form-section">
+  <div class="form-card">
+    <h2>Add New Mentor</h2>
+    <p class="form-sub">Register a mentor and their area of specialization.</p>
+
+    <form method="POST" action="{{ url_for('add_mentor') }}">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Dr. Kavita Rao" required>
+      </div>
+
+      <div class="form-group">
+        <label for="specialization">Specialization</label>
+        <input type="text" id="specialization" name="specialization" placeholder="e.g. Machine Learning" required>
+      </div>
+
+      <button type="submit" class="btn-primary">Add Mentor</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -28,11 +28,13 @@
       <span></span><span></span><span></span>
     </label>
 
-    <nav class="nav-links">
+     <nav class="nav-links">
       <a href="{{ url_for('home') }}" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
       <a href="{{ url_for('about') }}" class="{{ 'active' if active_page == 'about' else '' }}">About</a>
-      <a href="{{ url_for('add_intern_page') }}">Add Intern</a>
+      <a href="{{ url_for('add_intern') }}" class="{{ 'active' if active_page == 'add' else '' }}">Add Intern</a>
       <a href="{{ url_for('view_interns') }}" class="{{ 'active' if active_page == 'view' else '' }}">View Interns</a>
+      <a href="{{ url_for('add_mentor') }}" class="{{ 'active' if active_page == 'add_mentor' else '' }}">Add Mentor</a>
+      <a href="{{ url_for('view_mentors') }}" class="{{ 'active' if active_page == 'view_mentors' else '' }}">View Mentors</a>
       <a href="{{ url_for('attendance_page') }}" class="{{ 'active' if active_page == 'attendance' else '' }}">Attendance</a>
     </nav>
   </div>

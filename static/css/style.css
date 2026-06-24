@@ -389,6 +389,31 @@ a { text-decoration: none; color: inherit; }
 
 .btn-delete:hover { background: var(--pink-dark); }
 
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-edit {
+  display: inline-block;
+  background: var(--white);
+  color: var(--purple-deep);
+  border: 1.5px solid var(--purple-deep);
+  padding: 6px 15px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-edit:hover {
+  background: var(--purple-deep);
+  color: var(--white);
+}
+
 .empty-row {
   text-align: center !important;
   padding: 34px 18px !important;
@@ -585,4 +610,37 @@ a { text-decoration: none; color: inherit; }
     padding:12px;
     text-align:center;
     border:1px solid #ddd;
+}
+.status-group{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:10px;
+}
+
+.status-option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px 20px;
+    border:1px solid #e5d5f7;
+    border-radius:12px;
+    background:#fff;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:500;
+}
+
+.status-option:hover{
+    background:#f9f4ff;
+}
+
+.status-option input[type="radio"]{
+    width:20px;
+    height:20px;
+    margin:0;
+}
+
+.status-option span{
+    color:#2d1457;
 }
