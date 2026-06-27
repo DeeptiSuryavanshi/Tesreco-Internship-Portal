@@ -48,7 +48,7 @@ def inject_year():
     return {"current_year": datetime.now().year}
 
 
-# home page and about page
+# home page 
 
 @app.route("/")
 def home():
